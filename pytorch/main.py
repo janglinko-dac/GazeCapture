@@ -45,15 +45,15 @@ def str2bool(v):
     else:
         raise argparse.ArgumentTypeError('Boolean value expected.')
 
-parser = argparse.ArgumentParser(description='iTracker-pytorch-Trainer.')
-parser.add_argument('--data_path', help="Path to processed dataset. It should contain metadata.mat. Use prepareDataset.py.")
-parser.add_argument('--sink', type=str2bool, nargs='?', const=True, default=False, help="Just sink and terminate.")
-parser.add_argument('--reset', type=str2bool, nargs='?', const=True, default=False, help="Start from scratch (do not load).")
-args = parser.parse_args()
+# parser = argparse.ArgumentParser(description='iTracker-pytorch-Trainer.')
+# parser.add_argument('--data_path', help="Path to processed dataset. It should contain metadata.mat. Use prepareDataset.py.")
+# parser.add_argument('--sink', type=str2bool, nargs='?', const=True, default=False, help="Just sink and terminate.")
+# parser.add_argument('--reset', type=str2bool, nargs='?', const=True, default=False, help="Start from scratch (do not load).")
+# args = parser.parse_args()
 
 # Change there flags to control what happens.
-doLoad = not args.reset # Load checkpoint at the beginning
-doTest = args.sink # Only run test, no training
+doLoad = not False # Load checkpoint at the beginning
+doTest = False # Only run test, no training
 
 workers = 16
 epochs = 25
@@ -97,8 +97,8 @@ def main():
             print('Warning: Could not read checkpoint!')
 
     
-    dataTrain = ITrackerData(dataPath = args.data_path, split='train', imSize = imSize)
-    dataVal = ITrackerData(dataPath = args.data_path, split='test', imSize = imSize)
+    dataTrain = ITrackerData(dataPath = "", split='train', imSize = imSize)
+    dataVal = ITrackerData(dataPath = "", split='test', imSize = imSize)
    
     train_loader = torch.utils.data.DataLoader(
         dataTrain,
